@@ -1,3 +1,4 @@
+from pathlib import Path
 import os 
 from dotenv import load_dotenv
 
@@ -8,6 +9,8 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 GEMINI_MODEL = "gemini-3.5-flash"
 STT_MODEL_ID = "scribe_v2"
+BASE_DIR = Path(__file__).resolve().parent.parent
+DB_PATH = BASE_DIR / "data" / "asistente.db"
 TTS_MODEL_ID = "eleven_multilingual_v2"
 VOICE_ID = "JBFqnCBsd6RMkjVDRZzb"
 TTS_SAMPLE_RATE = 24000
