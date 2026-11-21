@@ -12,16 +12,11 @@ def obtener_logger(nombre: str) -> logging.Logger:
     logger = logging.getLogger(nombre)
     if logger.handlers:
         return logger
-    
+
     logger.setLevel(logging.INFO)
-    formato = logging.Formatter(
-        "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
-    )
+    formato = logging.Formatter("%(asctime)s | %(levelname)s | %(name)s | %(message)s")
     archivo = RotatingFileHandler(
-        LOG_DIR / "asistente_log",
-        maxBytes=1_000_000,
-        backupCount=3,
-        encoding="utf-8"
+        LOG_DIR / "asistente_log", maxBytes=1_000_000, backupCount=3, encoding="utf-8"
     )
     archivo.setFormatter(formato)
     logger.addHandler(archivo)

@@ -19,6 +19,8 @@ CREATE TABLE IF NOT EXISTS mensajes (
     FOREIGN KEY (sesion_id) REFERENCES sesiones(id) 
 );
 """
+
+
 @contextmanager
 def _conectar():
     """Abre la conexion, confirma cambios y la cierra siempre."""
@@ -34,39 +36,44 @@ def _conectar():
         raise
     finally:
         conexion.close()
-        
-def _ahora()-> str:
+
+
+def _ahora() -> str:
     return datetime.now().isoformat(timespec="seconds")
 
-def iniciar_bd()-> None:
+
+def iniciar_bd() -> None:
     """Crea las tablas si todavía no existen."""
-    with _conectar() as conexion: 
+    with _conectar() as conexion:
         conexion.executescript(ESQUEMA)
-        
-def crear_sesion()-> int:
+
+
+def crear_sesion() -> int:
     """Registra una nueva sesion y devuelve su id."""
     with _conectar() as conexion:
         cursor = conexion.execute(
-            "INSERT INTO sesiones (inicio) VALUES (?)", 
+            "INSERT INTO sesiones (inicio) VALUES (?)",
             (_ahora(),),
         )
         return cursor.lastrowid
 
-def guardar_mensaje(sesion_id: int, rol: str, contenido: str) ->None:
+
+def guardar_mensaje(sesion_id: int, rol: str, contenido: str) -> None:
     """Guardar un mensaje del usuario o del asistente."""
     with _conectar() as conexion:
         conexion.execute(
             "INSERT INTO mensajes (sesion_id, rol, contenido, fecha)"
             "VALUES (?, ?, ?, ?)",
             (sesion_id, rol, contenido, _ahora()),
-        )    
+        )
+
 
 def obtener_historial(limite: int = 20) -> list[dict]:
-            """Devuelve los últimos mensajes, del mas antiguo al mas reciente."""
-            with _conectar() as conexion:
-                filas = conexion.execute(
-                    "SELECT sesion_id, rol, contenido, fecha FROM mensajes "
-                    "ORDER BY id DESC LIMIT ?",
-                    (limite,),
-                ).fetchall()
-            return [dict(fila) for fila in reversed(filas)]    
+    """Devuelve los últimos mensajes, del mas antiguo al mas reciente."""
+    with _conectar() as conexion:
+        filas = conexion.execute(
+            "SELECT sesion_id, rol, contenido, fecha FROM mensajes "
+            "ORDER BY id DESC LIMIT ?",
+            (limite,),
+        ).fetchall()
+    return [dict(fila) for fila in reversed(filas)]

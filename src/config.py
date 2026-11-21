@@ -1,5 +1,6 @@
+import os
 from pathlib import Path
-import os 
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -25,6 +26,6 @@ PROMPT_SISTEMA = (
 
 if not ELEVENLABS_API_KEY:
     raise RuntimeError("Falta ELEVENLABS_API_KEY. Revisa tu archivo .env")
-                       
+
 if not GEMINI_API_KEY:
     raise RuntimeError("Falta GEMINI_API_KEY. Revisa tu archivo .env")

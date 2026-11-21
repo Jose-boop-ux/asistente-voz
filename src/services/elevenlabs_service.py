@@ -14,6 +14,7 @@ from config import (
 
 _client = ElevenLabs(api_key=ELEVENLABS_API_KEY)
 
+
 def transcribir(audio_wav: bytes) -> str:
     """Convierte audio WAV en texto (español)."""
     resultado = _client.speech_to_text.convert(
@@ -22,6 +23,7 @@ def transcribir(audio_wav: bytes) -> str:
         language_code="spa",
     )
     return resultado.text.strip()
+
 
 def hablar(texto: str) -> None:
     """Convierte texto en voz y lo reproduce."""
@@ -35,4 +37,3 @@ def hablar(texto: str) -> None:
     muestras = np.frombuffer(datos, dtype=np.int16)
     sd.play(muestras, samplerate=TTS_SAMPLE_RATE)
     sd.wait()
-    
