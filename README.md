@@ -40,7 +40,7 @@ Micrófono → Voz a texto (ElevenLabs) → IA (Google Gemini) → Texto a voz (
 ## Instalación
 
 ```powershell
-git clone https://github.com/JoseDelgado/asistente-voz.git
+git clone https://github.com/Jose-boop-ux/asistente-voz.git
 cd asistente-voz
 python -m venv venv
 venv\Scripts\activate
