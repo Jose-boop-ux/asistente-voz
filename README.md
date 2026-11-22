@@ -18,6 +18,7 @@ Micrófono → Voz a texto (ElevenLabs) → IA (Google Gemini) → Texto a voz (
 - Registro de eventos con rotación de archivos (`logs/asistente.log`).
 - Pruebas automáticas con pytest, sin gastar créditos ni usar el micrófono.
 - Código formateado con black y revisado con ruff.
+- Detección automática de silencio: deja de grabar cuando termina de hablar.
 
 ## Tecnologías
 
@@ -120,7 +121,7 @@ Las pruebas usan una base de datos temporal y reemplazan micrófono, voz e IA po
 
 ## Limitaciones y mejoras futuras
 
-- La grabación dura un tiempo fijo (5 segundos). Mejora prevista: detectar el silencio para terminar de grabar automáticamente.
+- El umbral de detección de voz (´UMBRAL_MINIMO´ en ´src/config.py´) puede necesitar ajustes según tu micrófono y el ruido del lugar. 
 - Reproducir el audio mientras se genera (streaming) para reducir la espera.
 - Recuperar el contexto de conversaciones anteriores desde la base de datos.
 

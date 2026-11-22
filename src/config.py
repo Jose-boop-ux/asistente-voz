@@ -15,7 +15,10 @@ DB_PATH = BASE_DIR / "data" / "asistente.db"
 TTS_MODEL_ID = "eleven_multilingual_v2"
 VOICE_ID = "JBFqnCBsd6RMkjVDRZzb"
 TTS_SAMPLE_RATE = 24000
-SEGUNDOS_GRABACION = 5
+MAX_SEGUNDOS_ESPERA = 8
+MAX_SEGUNDOS_GRABACION = 20
+SEGUNDOS_SILENCIO = 1.0
+UMBRAL_MINIMO = 600
 
 PROMPT_SISTEMA = (
     "Eres un asistente de voz amable que habla español. "

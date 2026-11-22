@@ -1,5 +1,4 @@
 from audio.microfono import grabar
-from config import SEGUNDOS_GRABACION
 from database.db import crear_sesion, guardar_mensaje, iniciar_bd
 from logger import obtener_logger
 from services.elevenlabs_service import hablar, transcribir
@@ -13,8 +12,8 @@ MAX_ERRORES_SEGUIDOS = 3
 
 def procesar_turno(cerebro: Cerebro, sesion_id: int) -> bool:
     """Ejecuta un turno completo. Devuelve False si el usuario quiere salir."""
-    audio = grabar(SEGUNDOS_GRABACION)
-    texto = transcribir(audio)
+    audio = grabar()
+    texto = transcribir(audio) if audio else ""
 
     if not texto:
         print("No te escuché, intenta de nuevo.")
@@ -52,10 +51,12 @@ def main() -> None:
         except Exception:
             errores_seguidos += 1
             log.exception("Error en el turno (%s seguidos)", errores_seguidos)
-            print("Hubo un problema. Revisa tu conexion e intenta de nuevo.")
+            print("Hubo un problema. Revisa tu conexión e intenta de nuevo.")
             if errores_seguidos >= MAX_ERRORES_SEGUIDOS:
-                print("Demasiados errores seguidos. Cerrando el sistema.")
+                print("Demasiados errores seguidos. Cerrando el asistente.")
                 break
+
+    log.info("Sesión %s terminada", sesion_id)
 
 
 if __name__ == "__main__":
