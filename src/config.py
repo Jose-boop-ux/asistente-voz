@@ -19,6 +19,7 @@ MAX_SEGUNDOS_ESPERA = 8
 MAX_SEGUNDOS_GRABACION = 20
 SEGUNDOS_SILENCIO = 1.0
 UMBRAL_MINIMO = 600
+MENSAJES_CONTEXTO = 10
 
 PROMPT_SISTEMA = (
     "Eres un asistente de voz amable que habla español. "

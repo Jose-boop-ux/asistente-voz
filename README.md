@@ -118,6 +118,7 @@ Las pruebas usan una base de datos temporal y reemplazan micrófono, voz e IA po
 - Las conversaciones se guardan solo en tu equipo (`data/asistente.db`).
 - El audio y el texto se envían a ElevenLabs y a Google para procesarse, según los términos de cada servicio.
 - El registro de eventos no incluye el contenido de las conversaciones.
+- Al iniciar, los últimos mensajes guardados se envían con Gemini como contexto (se desactiva con ´MENSAJES_CONTEXTO = 0´ en ´src/config.py´)
 
 ## Limitaciones y mejoras futuras
 
