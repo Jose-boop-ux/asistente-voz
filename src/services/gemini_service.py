@@ -2,6 +2,7 @@ from google import genai
 from google.genai import types
 
 from config import GEMINI_API_KEY, GEMINI_MODEL, PROMPT_SISTEMA
+from tools import HERRAMIENTAS
 
 _client = genai.Client(api_key=GEMINI_API_KEY)
 
@@ -33,7 +34,8 @@ class Cerebro:
         self._chat = _client.chats.create(
             model=GEMINI_MODEL,
             config=types.GenerateContentConfig(
-                system_instruction=construir_instruccion(contexto)
+                system_instruction=construir_instruccion(contexto),
+                tools=HERRAMIENTAS,
             ),
         )
 
